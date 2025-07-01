@@ -3,7 +3,7 @@ using SniperBot.Analyzers.Models;
 
 namespace SniperBot.Analyzers.Implementations
 {
-    internal class ReservsAnalyzer : ITokenAnalyzer
+    public class ReservsAnalyzer : ITokenAnalyzer
     {
         private const int MIN_BNB_LIQUIDITY = 8;
         public async Task<AnalysisResult> Analyze(TokenAnalysisInfo info)

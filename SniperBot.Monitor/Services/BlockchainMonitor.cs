@@ -2,7 +2,8 @@
 using Nethereum.RPC.Eth.DTOs;
 using Nethereum.Util;
 using Nethereum.Web3;
-using SniperBot.Monitor.Extensions;
+using SniperBot.Core.Extensions;
+using SniperBot.Core.Helpers;
 using SniperBot.Monitor.Models;
 
 
@@ -44,13 +45,6 @@ namespace SniperBot.Monitor.Services
                     if (token0.ToLower() != Constants.WBNB.ToLower() && token1.ToLower() != Constants.WBNB.ToLower())
                     {
                         Console.WriteLine("⛔ Пара без WBNB — пропускаем.");
-                        continue;
-                    }
-
-                    var tokenContract = web3.Eth.GetContract(Abi.GetErc20(), token0);
-                    if (!await TokenSniperValidation.IsSafeToken(tokenContract))
-                    {
-                        Console.WriteLine("❌ Подозрительный токен — пропускаем.");
                         continue;
                     }
 

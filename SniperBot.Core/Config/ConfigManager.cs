@@ -1,24 +1,28 @@
 ﻿using Microsoft.Extensions.Configuration;
-using SniperBot.Monitor.Models;
+using SniperBot.Core.Models;
 
-namespace SniperBot.Monitor.Services
+namespace SniperBot.Core.Config
 {
-    internal static class ConfigurationService
+    public class ConfigManager
     {
-        internal static Configuration LoadEnv()
+        private Configuration _config;
+        public Configuration Load()
         {
+            if (_config is not null)
+                return _config;
+
             var config = new ConfigurationBuilder()
                 .AddJsonFile("ConfigFiles/appsettings.json", optional: false)
                 .Build();
 
-            var result = new Configuration()
+            _config = new Configuration()
             {
                 RpcUrl = config["RPC_URL"],
                 PrivateKey = config["PRIVATE_KEY"],
                 PublicAddress = config["ADDRESS"]
             };
 
-            return result;
+            return _config;
         }
     }
 }

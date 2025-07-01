@@ -2,7 +2,7 @@
 
 namespace SniperBot.Analyzers.Implementations
 {
-    internal class UnsafeFunctionsAnalyzer : ITokenAnalyzer
+    public class UnsafeFunctionsAnalyzer : ITokenAnalyzer
     {
         public async Task<AnalysisResult> Analyze(TokenAnalysisInfo info)
         {

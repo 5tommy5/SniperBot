@@ -1,6 +1,6 @@
-﻿namespace SniperBot.Monitor.Models
+﻿namespace SniperBot.Core.Models
 {
-    internal class Configuration
+    public class Configuration
     {
         public string RpcUrl { get; set; }
         public string PublicAddress { get; set; }

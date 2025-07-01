@@ -1,13 +1,13 @@
-﻿namespace SniperBot.Monitor.Services
+﻿namespace SniperBot.Core.Helpers
 {
-    internal static class Abi
+    public static class AbiHelper
     {
         private static string? _factoryAbi;
         private static string? _routerAbi;
         private static string? _erc20Abi;
         private static string? _pairAbi;
 
-        internal static string GetFactory()
+        public static string GetFactory()
         {
             if (_factoryAbi is not null)
                 return _factoryAbi;
@@ -17,7 +17,7 @@
             return _factoryAbi;
         }
 
-        internal static string GetRouter()
+        public static string GetRouter()
         {
             if (_routerAbi is not null)
                 return _routerAbi;
@@ -27,7 +27,7 @@
             return _routerAbi;
         }
 
-        internal static string GetErc20()
+        public static string GetErc20()
         {
             if (_erc20Abi is not null)
                 return _erc20Abi;
@@ -37,7 +37,7 @@
             return _erc20Abi;
         }
 
-        internal static string GetPair()
+        public static string GetPair()
         {
             if (_pairAbi is not null)
                 return _pairAbi;
@@ -46,6 +46,5 @@
 
             return _pairAbi;
         }
-
     }
 }

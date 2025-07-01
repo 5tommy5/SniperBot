@@ -3,7 +3,7 @@ using System.Text.Json;
 
 namespace SniperBot.Analyzers.Implementations
 {
-    internal class HoneypotAnalyzer : ITokenAnalyzer
+    public class HoneypotAnalyzer : ITokenAnalyzer
     {
         private readonly HttpClient _client;
         public HoneypotAnalyzer(HttpClient client)

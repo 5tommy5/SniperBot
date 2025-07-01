@@ -4,7 +4,7 @@ using SniperBot.Analyzers.Models;
 
 namespace SniperBot.Analyzers.Implementations
 {
-    internal class OwnerAnalyzer : ITokenAnalyzer
+    public class OwnerAnalyzer : ITokenAnalyzer
     {
         private const string NO_ADDRESS = "0x0000000000000000000000000000000000000000";
         private readonly ILogger<OwnerAnalyzer> _logger;

@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SniperBot.Monitor", "Sniper
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SniperBot.Analyzers", "SniperBot.Analyzers\SniperBot.Analyzers.csproj", "{DDE91152-1200-4716-81A1-F2D358CE4201}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SniperBot.Core", "SniperBot.Core\SniperBot.Core.csproj", "{1FE7636E-5021-4483-B022-F33966DD28E5}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{DDE91152-1200-4716-81A1-F2D358CE4201}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DDE91152-1200-4716-81A1-F2D358CE4201}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DDE91152-1200-4716-81A1-F2D358CE4201}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1FE7636E-5021-4483-B022-F33966DD28E5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1FE7636E-5021-4483-B022-F33966DD28E5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1FE7636E-5021-4483-B022-F33966DD28E5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1FE7636E-5021-4483-B022-F33966DD28E5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

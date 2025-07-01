@@ -1,25 +1,44 @@
-﻿using Nethereum.Web3;
+﻿using Microsoft.Extensions.Logging;
+using Nethereum.Web3;
 using Nethereum.Web3.Accounts;
 using SniperBot.Analyzers;
+using SniperBot.Analyzers.Implementations;
 using SniperBot.Analyzers.Models;
-using SniperBot.Monitor.Extensions;
+using SniperBot.Core.Config;
+using SniperBot.Core.Extensions;
+using SniperBot.Core.Helpers;
 using SniperBot.Monitor.Services;
 Console.OutputEncoding = System.Text.Encoding.UTF8;
 
-var config = ConfigurationService.LoadEnv();
+#region configuration
+var configManager = new ConfigManager();
+var config = configManager.Load();
 
-var account = new Account(config.PrivateKey);
-var web3 = new Web3(account, config.RpcUrl);
-
-
-var factory = web3.Eth.GetContract(Abi.GetFactory(), Constants.FACTORY_ADDRESS);
-var router = web3.Eth.GetContract(Abi.GetRouter(), Constants.ROUTER_ADDRESS);
+var loggerFactory = new LoggerFactory();
 
 var monitor = new BlockchainMonitor();
 
-Console.WriteLine("[*] Мониторим новые пары...");
+using var client = new HttpClient();
 
-var analyzers = new List<ITokenAnalyzer>();
+var analyzers = new List<ITokenAnalyzer>()
+{
+    new HoneypotAnalyzer(client),
+    new OwnerAnalyzer(loggerFactory.CreateLogger<OwnerAnalyzer>()),
+    new ReservsAnalyzer(),
+    new UnsafeFunctionsAnalyzer()
+};
+#endregion
+
+
+#region web3
+var account = new Account(config.PrivateKey);
+var web3 = new Web3(account, config.RpcUrl);
+
+var factory = web3.Eth.GetContract(AbiHelper.GetFactory(), Constants.FACTORY_ADDRESS);
+var router = web3.Eth.GetContract(AbiHelper.GetRouter(), Constants.ROUTER_ADDRESS);
+#endregion
+
+Console.WriteLine("[*] Мониторим новые пары...");
 
 await foreach (var token in monitor.Monitor(web3, factory))
 {
@@ -30,8 +49,8 @@ await foreach (var token in monitor.Monitor(web3, factory))
         Token0 = token.Token0,
         Token1 = token.Token1,
         Pair = token.Pair,
-        TokenContract = web3.Eth.GetContract(Abi.GetErc20(), mainToken),
-        PairContract = web3.Eth.GetContract(Abi.GetPair(), token.Pair)
+        TokenContract = web3.Eth.GetContract(AbiHelper.GetErc20(), mainToken),
+        PairContract = web3.Eth.GetContract(AbiHelper.GetPair(), token.Pair)
     };
 
     var analyzerTasks = new List<Task<AnalysisResult>>();
@@ -56,11 +75,7 @@ await foreach (var token in monitor.Monitor(web3, factory))
     }
 
     if (result is not null && !result.IsSafe)
-    {
-        Console.ForegroundColor = ConsoleColor.Red;
         Console.WriteLine($"[!] Не нужно было покупать токен [{mainToken}] по причине: {result.Reason}");
-        Console.ResetColor();
-    }
     else
     {
         Console.ForegroundColor = ConsoleColor.Green;
