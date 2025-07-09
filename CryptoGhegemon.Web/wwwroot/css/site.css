@@ -1,0 +1,101 @@
+@import url(memecoinDashboard.css);
+:root {
+  /* Backgrounds */
+  --bg-primary: #0D1117;       /* общий фон */
+  --bg-secondary: #161B22;     /* панели, боковые меню */
+  --bg-surface: #21262D;       /* карточки, попапы */
+
+  /* Text */
+  --text-primary: #E6EDF3;     /* основной текст */
+  --text-secondary: #8B949E;   /* второстепенный текст */
+  --text-muted: #6E7681;       /* подписи, хелперы */
+
+  /* Accent colors */
+  --accent: #3B82F6;           /* кнопки, ссылки */
+  --accent-hover: #60A5FA;     /* hover эффект */
+  --accent-bg: rgba(59, 130, 246, 0.1); /* фон кнопок */
+
+  /* Success / Warning / Danger */
+  --success: #10B981;
+  --warning: #F59E0B;
+  --danger: #EF4444;
+
+  /* Borders & Dividers */
+  --border: #30363D;
+
+  /* Radius & Shadow */
+  --radius: 8px;
+  --shadow-sm: 0 1px 2px rgba(0,0,0,0.05);
+  --shadow-md: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  line-height: 1.6;
+}
+
+.container {
+  width: 100%;
+  padding: 0 2rem;
+}
+
+.flex-container {
+  display: flex;
+  gap: 2rem;
+  align-items: center;
+}
+
+.main-header {
+  padding: 1.5rem 0;
+  margin-bottom: 2rem;
+}
+
+.logo {
+  font-size: 1.8rem;
+  font-weight: 700;
+  transition: color 0.4s;
+  cursor: pointer;
+}
+
+.logo:hover {
+  color: var(--accent-hover);
+}
+
+.nav {
+  margin-top: 0.5rem;
+}
+
+.nav-link {
+  margin-right: 1rem;
+  text-decoration: none;
+  color: var(--text-primary);
+  transition: color 0.2s;
+}
+
+.nav-link:hover {
+  color: var(--text-secondary);
+}
+
+.main-content {
+  min-height: 70vh;
+}
+
+.main-footer {
+  text-align: center;
+  padding: 1rem 0;
+  margin-top: 3rem;
+  font-size: 0.9rem;
+}

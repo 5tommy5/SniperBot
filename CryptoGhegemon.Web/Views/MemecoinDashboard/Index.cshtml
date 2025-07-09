@@ -1,0 +1,100 @@
+@using Core
+@{
+    ViewData["Title"] = "Dashboard";
+    var memecoins = ViewBag.Memecoins as IEnumerable<TokenInfo>;
+}
+
+<div class="info-box" id="tokenInfoBox">
+    <button class="info-close" onclick="document.getElementById('tokenInfoBox').remove()">×</button>
+    <h2 class="info-title">Откуда берутся токены?</h2>
+    <p>
+        Мы в реальном времени сканируем блокчейны (Ethereum, BSC, Solana) на появление новых токенов.
+        Каждая запись содержит ключевую информацию: дату создания, тикер, уровень риска.
+    </p>
+    <p>
+        При покупке подписки вы получаете доступ к дополнительным функциям:
+    </p>
+    <ul class="info-list">
+        <li>Подключение Telegram-бота с уведомлениями</li>
+        <li>Интеграция с Discord</li>
+        <li>Прямой доступ к API для своей платформы</li>
+    </ul>
+    <p>
+        Это даёт вам фору перед остальными и повышает шанс зайти в монету раньше всех
+    </p>
+</div>
+
+<div class="token-filters">
+    <input type="text" class="filter-input" placeholder="Search by name or symbol..." />
+
+    <select class="filter-select">
+        <option value="">All Chains</option>
+        <option value="Ethereum">Ethereum</option>
+        <option value="BSC">BSC</option>
+        <option value="Solana">Solana</option>
+    </select>
+
+    <select class="filter-select">
+        <option value="">All Risks</option>
+        <option value="low">Low</option>
+        <option value="medium">Medium</option>
+        <option value="high">High</option>
+    </select>
+
+    <button class="filter-btn">Apply</button>
+</div>
+
+<div class="token-table-wrapper">
+    <table class="token-table">
+        <thead>
+        <tr>
+            <th>Name</th>
+            <th>Symbol</th>
+            <th>Chain</th>
+            <th>Created</th>
+            <th>Risk</th>
+        </tr>
+        </thead>
+        <tbody>
+        @foreach (var meme in memecoins)
+        {
+            <tr>
+                <td>@meme.Name</td>
+                <td><a href="https://dexscreener.com/@meme.Chain/@meme.Address" target="_blank">@meme.Symbol</a></td>
+                <td>@meme.Chain</td>
+                <td>@meme.DetectedAt</td>
+                <td><span class="badge danger">Low</span></td>
+            </tr>
+        }
+        <tr>
+            <td>SuperToken</td>
+            <td>SUPR</td>
+            <td>Ethereum</td>
+            <td>2025-07-04 18:20</td>
+            <td><span class="badge danger">High</span></td>
+        </tr>
+        <tr>
+            <td>FinanceChain</td>
+            <td>FCH</td>
+            <td>BSC</td>
+            <td>2025-07-04 18:05</td>
+            <td><span class="badge success">Low</span></td>
+        </tr>
+        <tr>
+            <td>MoonToken</td>
+            <td>MOON</td>
+            <td>Solana</td>
+            <td>2025-07-04 17:55</td>
+            <td><span class="badge warning">Medium</span></td>
+        </tr>
+        </tbody>
+    </table>
+
+    @* <div class="pagination"> *@
+    @*     <button class="page-btn" disabled>&laquo; Prev</button> *@
+    @*     <button class="page-btn active">1</button> *@
+    @*     <button class="page-btn">2</button> *@
+    @*     <button class="page-btn">3</button> *@
+    @*     <button class="page-btn">Next &raquo;</button> *@
+    @* </div> *@
+</div>
